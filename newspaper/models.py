@@ -5,7 +5,7 @@ from newspaper_agency import settings
 
 
 class Redactor(AbstractUser):
-    years_of_experience = models.IntegerField()
+    years_of_experience = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.username
