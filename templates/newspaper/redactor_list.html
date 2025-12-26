@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Redactors</h2>
+
+  <ul>
+    {% for redactor in redactor_list %}
+      <li>
+        <strong>{{ redactor.username }}</strong><br>
+        Experience: {{ redactor.years_of_experience }} years
+      </li>
+    {% empty %}
+      <li>No redactors available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
