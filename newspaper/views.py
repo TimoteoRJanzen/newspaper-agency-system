@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
+from django.views import generic
 
-from newspaper.models import Newspaper, Topic, Redactor
+from newspaper.models import Newspaper, Topic
 
 
 def index(request):
@@ -18,3 +19,9 @@ def index(request):
     }
 
     return render(request, "newspaper/index.html", context=context)
+
+
+class TopicListView(generic.ListView):
+    model = Topic
+    template_name = "newspaper/topic_list.html"
+    context_object_name = "topics"
