@@ -6,7 +6,11 @@
   <ul>
     {% for newspaper in newspaper_list %}
       <li>
-        <strong>{{ newspaper.title }}</strong>
+        <strong>
+          <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">
+            {{ newspaper.title }}
+          </a>
+        </strong>
         <br>
         Topic: {{ newspaper.topic.name }}
         <br>
