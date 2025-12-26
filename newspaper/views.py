@@ -25,13 +25,14 @@ class TopicListView(generic.ListView):
     model = Topic
 
 
+
 class NewspaperListView(generic.ListView):
     model = Newspaper
-
+    queryset = Newspaper.objects.select_related("topic")
 
 class NewspaperDetailView(generic.DetailView):
     model = Newspaper
-
+    queryset = Newspaper.objects.select_related("topic").prefetch_related("publishers")
 
 class RedactorListView(generic.ListView):
     model = get_user_model()
