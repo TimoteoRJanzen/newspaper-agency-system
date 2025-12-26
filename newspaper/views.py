@@ -25,6 +25,7 @@ def index(request):
 
 class TopicListView(generic.ListView):
     model = Topic
+    paginate_by = 5
 
 
 class TopicDetailView(generic.DetailView):
@@ -51,6 +52,7 @@ class TopicDeleteView(generic.DeleteView):
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
+    paginate_by = 5
     queryset = Newspaper.objects.select_related("topic").prefetch_related("publishers")
 
 
@@ -77,6 +79,7 @@ class NewspaperDeleteView(generic.DeleteView):
 
 class RedactorListView(generic.ListView):
     model = get_user_model()
+    paginate_by = 5
 
 
 class RedactorDetailView(generic.DetailView):
