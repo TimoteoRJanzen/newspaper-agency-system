@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 from newspaper_agency import settings
 
@@ -34,6 +35,9 @@ class Newspaper(models.Model):
         settings.AUTH_USER_MODEL,
         related_name="newspapers"
     )
+
+    def get_absolute_url(self):
+        return reverse("newspaper:newspaper-detail", kwargs={"pk": self.pk})
 
     class Meta:
         ordering = ["-published_date"]

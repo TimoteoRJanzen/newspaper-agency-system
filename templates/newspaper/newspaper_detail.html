@@ -12,6 +12,14 @@
 
   <hr>
 
+  <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}">
+    Update newspaper
+  </a>
+  |
+  <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}">
+    Delete newspaper
+  </a>
+
   <h3>Redactors</h3>
   <ul>
     {% for redactor in newspaper.publishers.all %}
