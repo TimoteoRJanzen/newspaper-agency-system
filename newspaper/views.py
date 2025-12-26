@@ -23,5 +23,7 @@ def index(request):
 
 class TopicListView(generic.ListView):
     model = Topic
-    template_name = "newspaper/topic_list.html"
-    context_object_name = "topics"
+
+
+class NewspaperListView(generic.ListView):
+    model = Newspaper
