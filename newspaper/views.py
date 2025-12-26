@@ -29,5 +29,9 @@ class NewspaperListView(generic.ListView):
     model = Newspaper
 
 
+class NewspaperDetailView(generic.DetailView):
+    model = Newspaper
+
+
 class RedactorListView(generic.ListView):
     model = get_user_model()
