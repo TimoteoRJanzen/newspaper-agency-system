@@ -3,6 +3,10 @@
 {% block content %}
   <h2>Topics</h2>
 
+  <a href="{% url 'newspaper:topic-create' %}">
+    + Create topic
+  </a>
+
   <ul>
     {% for topic in topic_list %}
       <li>
