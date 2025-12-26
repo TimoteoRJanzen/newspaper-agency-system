@@ -7,6 +7,11 @@
     + Create topic
   </a>
 
+  <form method="get">
+    {{ search_form.as_p }}
+    <button type="submit">🔎</button>
+  </form>
+
   <ul>
     {% for topic in topic_list %}
       <li>

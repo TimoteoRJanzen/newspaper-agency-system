@@ -7,6 +7,11 @@
     + Create redactor
   </a>
 
+  <form method="get">
+    {{ search_form.as_p }}
+    <button type="submit">🔎</button>
+  </form>
+
   <ul>
     {% for redactor in redactor_list %}
       <li>
