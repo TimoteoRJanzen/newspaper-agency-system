@@ -3,6 +3,10 @@
 {% block content %}
   <h2>Newspapers</h2>
 
+  <a href="{% url 'newspaper:newspaper-create' %}">
+    + Create newspaper
+  </a>
+
   <ul>
     {% for newspaper in newspaper_list %}
       <li>
