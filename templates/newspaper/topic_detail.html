@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{{ topic.name }}</h2>
+
+  <h3>Newspapers in this topic</h3>
+
+  <ul>
+    {% for newspaper in topic.newspapers.all %}
+      <li>
+        <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">
+          {{ newspaper.title }}
+        </a>
+      </li>
+    {% empty %}
+      <li>No newspapers available for this topic.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

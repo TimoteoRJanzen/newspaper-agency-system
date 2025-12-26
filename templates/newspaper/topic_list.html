@@ -5,7 +5,11 @@
 
   <ul>
     {% for topic in topic_list %}
-      <li>{{ topic.name }}</li>
+      <li>
+        <a href="{% url 'newspaper:topic-detail' topic.pk %}">
+          {{ topic.name }}
+        </a>
+      </li>
     {% empty %}
       <li>No topics available.</li>
     {% endfor %}

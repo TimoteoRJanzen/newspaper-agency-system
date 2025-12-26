@@ -25,6 +25,9 @@ class TopicListView(generic.ListView):
     model = Topic
 
 
+class TopicDetailView(generic.DetailView):
+    model = Topic
+    queryset = Topic.objects.prefetch_related("newspapers")
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
