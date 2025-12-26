@@ -6,8 +6,12 @@ from django.views import generic
 from newspaper.forms import (
     RedactorCreationForm,
     RedactorUpdateForm,
-    RedactorSearchForm, NewspaperSearchForm, TopicSearchForm
+    RedactorSearchForm,
+    NewspaperForm,
+    NewspaperSearchForm,
+    TopicSearchForm
 )
+
 from newspaper.models import Newspaper, Topic
 
 Redactor = get_user_model()
@@ -81,8 +85,7 @@ class NewspaperListView(generic.ListView):
     def get_queryset(self):
         queryset = (
             Newspaper.objects
-            .select_related("topic")
-            .prefetch_related("publishers")
+            .prefetch_related("topics", "publishers")
         )
 
         form = NewspaperSearchForm(self.request.GET)
@@ -103,18 +106,17 @@ class NewspaperListView(generic.ListView):
 
 class NewspaperDetailView(generic.DetailView):
     model = Newspaper
-    queryset = Newspaper.objects.select_related("topic").prefetch_related("publishers")
+    queryset = Newspaper.objects.prefetch_related("topics", "publishers")
 
 
 class NewspaperCreateView(generic.CreateView):
     model = Newspaper
-    fields = ["title", "content", "topic", "publishers"]
-    success_url = reverse_lazy("newspaper:newspaper-list")
+    form_class = NewspaperForm
 
 
 class NewspaperUpdateView(generic.UpdateView):
     model = Newspaper
-    fields = ["title", "content", "topic", "publishers"]
+    form_class = NewspaperForm
 
 
 class NewspaperDeleteView(generic.DeleteView):

@@ -1,7 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from newspaper.models import Redactor
+from newspaper.models import Redactor, Newspaper
+
+
+class NewspaperForm(forms.ModelForm):
+    class Meta:
+        model = Newspaper
+        fields = ("title", "content", "topics", "publishers")
+
+        widgets = {
+            "topics": forms.CheckboxSelectMultiple(),
+            "publishers": forms.CheckboxSelectMultiple(),
+        }
 
 
 class RedactorCreationForm(UserCreationForm):

@@ -24,7 +24,10 @@
       <li>
         <strong>{{ newspaper.title }}</strong>
         <br>
-        Topic: {{ newspaper.topic.name }}
+          Topics:
+          {% for topic in newspaper.topics.all %}
+            {{ topic.name }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
         <br>
         Published: {{ newspaper.published_date }}
       </li>

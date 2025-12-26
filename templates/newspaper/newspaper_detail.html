@@ -3,7 +3,12 @@
 {% block content %}
   <h2>{{ newspaper.title }}</h2>
 
-  <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+  <p>
+    <strong>Topics:</strong>
+    {% for topic in newspaper.topics.all %}
+      {{ topic.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </p>
   <p><strong>Published:</strong> {{ newspaper.published_date }}</p>
 
   <hr>
