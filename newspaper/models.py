@@ -11,6 +11,9 @@ class Redactor(AbstractUser):
     def __str__(self):
         return self.username
 
+    def get_absolute_url(self):
+        return reverse("newspaper:redactor-detail", kwargs={"pk": self.pk})
+
 
 class Topic(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -36,11 +39,11 @@ class Newspaper(models.Model):
         related_name="newspapers"
     )
 
-    def get_absolute_url(self):
-        return reverse("newspaper:newspaper-detail", kwargs={"pk": self.pk})
-
     class Meta:
         ordering = ["-published_date"]
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("newspaper:newspaper-detail", kwargs={"pk": self.pk})

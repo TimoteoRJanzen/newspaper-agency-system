@@ -2,6 +2,15 @@
 
 {% block content %}
   <h2>{{ redactor.get_full_name|default:redactor.username }}</h2>
+  <hr>
+
+  <a href="{% url 'newspaper:redactor-update' redactor.pk %}">
+    Update redactor
+  </a>
+  |
+  <a href="{% url 'newspaper:redactor-delete' redactor.pk %}">
+    Delete redactor
+  </a>
 
   <p>
     <strong>Years of experience:</strong>
