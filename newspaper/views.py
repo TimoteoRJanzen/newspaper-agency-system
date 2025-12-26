@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from newspaper.forms import RedactorCreationForm
 from newspaper.models import Newspaper, Topic
 
 
@@ -60,3 +61,9 @@ class RedactorListView(generic.ListView):
 class RedactorDetailView(generic.DetailView):
     model = get_user_model()
     queryset = get_user_model().objects.prefetch_related("newspapers")
+
+
+class RedactorCreateView(generic.CreateView):
+    model = get_user_model()
+    form_class = RedactorCreationForm
+    success_url = reverse_lazy("newspaper:redactor-list")

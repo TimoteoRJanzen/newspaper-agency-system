@@ -3,6 +3,10 @@
 {% block content %}
   <h2>Redactors</h2>
 
+  <a href="{% url 'newspaper:redactor-create' %}">
+    + Create redactor
+  </a>
+
   <ul>
     {% for redactor in redactor_list %}
       <li>
