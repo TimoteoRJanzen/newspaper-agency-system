@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{{ redactor.get_full_name|default:redactor.username }}</h2>
+
+  <p>
+    <strong>Years of experience:</strong>
+    {{ redactor.years_of_experience }}
+  </p>
+
+  <h3>Newspapers</h3>
+
+  <ul>
+    {% for newspaper in redactor.newspapers.all %}
+      <li>
+        <strong>{{ newspaper.title }}</strong>
+        <br>
+        Topic: {{ newspaper.topic.name }}
+        <br>
+        Published: {{ newspaper.published_date }}
+      </li>
+    {% empty %}
+      <li>This redactor has no newspapers.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

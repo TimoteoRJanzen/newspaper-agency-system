@@ -6,7 +6,11 @@
   <ul>
     {% for redactor in redactor_list %}
       <li>
-        <strong>{{ redactor.username }}</strong><br>
+        <strong>
+          <a href="{% url 'newspaper:redactor-detail' redactor.pk %}">
+            {{ redactor.username }}
+          </a>
+        </strong>
         Experience: {{ redactor.years_of_experience }} years
       </li>
     {% empty %}

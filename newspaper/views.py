@@ -39,3 +39,7 @@ class NewspaperDetailView(generic.DetailView):
 
 class RedactorListView(generic.ListView):
     model = get_user_model()
+
+class RedactorDetailView(generic.DetailView):
+    model = get_user_model()
+    queryset = get_user_model().objects.prefetch_related("newspapers")
