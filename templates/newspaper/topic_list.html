@@ -11,7 +11,14 @@
     {% for topic in topic_list %}
       <li>
         <a href="{% url 'newspaper:topic-detail' topic.pk %}">
-          {{ topic.name }}
+          <li>
+            {{ topic.name }}
+            |
+            <a href="{% url 'newspaper:topic-update' topic.pk %}">Update</a>
+            |
+            <a href="{% url 'newspaper:topic-delete' topic.pk %}">Delete</a>
+          </li>
+
         </a>
       </li>
     {% empty %}
