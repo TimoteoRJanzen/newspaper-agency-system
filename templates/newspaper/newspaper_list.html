@@ -1,37 +1,67 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Newspapers</h2>
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+      <i class="bi bi-newspaper me-2"></i>Newspapers
+    </h2>
+    <a href="{% url 'newspaper:newspaper-create' %}" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-2"></i>Create Newspaper
+    </a>
+  </div>
 
-  <a href="{% url 'newspaper:newspaper-create' %}">
-    + Create newspaper
-  </a>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <form method="get" class="row g-3">
+        <div class="col-md-10">
+          <input type="text" name="title" class="form-control" placeholder="Search newspapers by title..." value="{{ request.GET.title }}">
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-secondary w-100">
+            <i class="bi bi-search me-2"></i>Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  <form method="get">
-    {{ search_form.as_p }}
-    <button type="submit">🔎</button>
-  </form>
-
-  <ul>
+  <div class="row">
     {% for newspaper in newspaper_list %}
-      <li>
-        <strong>
-          <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">
-            {{ newspaper.title }}
-          </a>
-        </strong>
-        <br>
-        <p>
-          Topics:
-          {% for topic in newspaper.topics.all %}
-            {{ topic.name }}{% if not forloop.last %}, {% endif %}
-          {% endfor %}
-        </p>
-        <br>
-        Published: {{ newspaper.published_date }}
-      </li>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}" class="text-decoration-none">
+                {{ newspaper.title }}
+              </a>
+            </h5>
+            <p class="card-text">
+              <small class="text-muted">
+                <i class="bi bi-tag me-1"></i>Topics:
+                {# Using prefetched topics - no additional queries #}
+                {% for topic in newspaper.topics.all %}
+                  <span class="badge bg-secondary">{{ topic.name }}</span>{% if not forloop.last %} {% endif %}
+                {% empty %}
+                  <span class="text-muted">No topics</span>
+                {% endfor %}
+              </small>
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                <i class="bi bi-calendar me-1"></i>Published: {{ newspaper.published_date }}
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
     {% empty %}
-      <li>No newspapers available.</li>
+      <div class="col-12">
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i>No newspapers available.
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
+</div>
 {% endblock %}

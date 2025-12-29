@@ -1,36 +1,65 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>{{ newspaper.title }}</h2>
+<div class="container py-5">
+  <div class="card shadow mb-4">
+    <div class="card-header bg-dark text-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">
+          <i class="bi bi-newspaper me-2"></i>
+          {{ newspaper.title }}
+        </h2>
+        <div>
+          <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}" class="btn btn-sm btn-outline-light me-2">
+            <i class="bi bi-pencil me-1"></i>Update
+          </a>
+          <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}" class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash me-1"></i>Delete
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>
+        <strong><i class="bi bi-tag me-2"></i>Topics:</strong>
+        {% for topic in newspaper.topics.all %}
+          <span class="badge bg-secondary">{{ topic.name }}</span>{% if not forloop.last %} {% endif %}
+        {% endfor %}
+      </p>
+      <p>
+        <strong><i class="bi bi-calendar me-2"></i>Published:</strong>
+        {{ newspaper.published_date }}
+      </p>
 
-  <p>
-    <strong>Topics:</strong>
-    {% for topic in newspaper.topics.all %}
-      {{ topic.name }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-  </p>
-  <p><strong>Published:</strong> {{ newspaper.published_date }}</p>
+      <hr>
 
-  <hr>
+      <div class="article-content">
+        <p>{{ newspaper.content }}</p>
+      </div>
+    </div>
+  </div>
 
-  <p>{{ newspaper.content }}</p>
+  <h3 class="mb-3">
+    <i class="bi bi-people-fill me-2"></i>Redactors
+  </h3>
 
-  <hr>
-
-  <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}">
-    Update newspaper
-  </a>
-  |
-  <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}">
-    Delete newspaper
-  </a>
-
-  <h3>Redactors</h3>
-  <ul>
-    {% for redactor in newspaper.publishers.all %}
-      <li>{{ redactor.username }}</li>
-    {% empty %}
-      <li>No redactors assigned.</li>
-    {% endfor %}
-  </ul>
+  <div class="card shadow">
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        {% for redactor in newspaper.publishers.all %}
+          <li class="list-group-item">
+            <i class="bi bi-person-circle me-2"></i>
+            <a href="{% url 'newspaper:redactor-detail' redactor.pk %}" class="text-decoration-none">
+              {{ redactor.username }}
+            </a>
+          </li>
+        {% empty %}
+          <li class="list-group-item">
+            <i class="bi bi-info-circle me-2"></i>No redactors assigned.
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}
