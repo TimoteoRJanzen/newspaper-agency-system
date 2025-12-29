@@ -18,6 +18,7 @@ from newspaper.models import Newspaper, Topic
 
 Redactor = get_user_model()
 
+
 @login_required
 def index(request):
     """Home page view for the Newspaper Agency."""
@@ -56,7 +57,6 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
             initial={"name": self.request.GET.get("name", "")}
         )
         return context
-
 
 
 class TopicDetailView(LoginRequiredMixin, generic.DetailView):
