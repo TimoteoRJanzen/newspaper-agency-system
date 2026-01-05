@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Converted to Bootstrap card grid layout -->
+<div class="row mb-5">
+  <div class="col-lg-8">
+    <h1 class="display-4 fw-bold mb-3">Newspaper Agency</h1>
+    <p class="lead text-muted">
+      Welcome to the Newspaper Agency system. Manage your editorial content, track your team, and organize topics efficiently.
+    </p>
+  </div>
+</div>
+
+<div class="row g-4 mb-5">
+  <!-- Newspapers Card -->
+  <div class="col-md-4">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div class="p-3 bg-primary bg-opacity-10 rounded">
+            <i class="bi bi-newspaper fs-3 text-primary"></i>
+          </div>
+          <span class="badge bg-secondary">Publications</span>
+        </div>
+        <h2 class="display-5 fw-bold mb-0">{{ num_newspapers }}</h2>
+        <p class="text-muted mb-0">Total newspapers</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topics Card -->
+  <div class="col-md-4">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div class="p-3 bg-success bg-opacity-10 rounded">
+            <i class="bi bi-tags fs-3 text-success"></i>
+          </div>
+          <span class="badge bg-secondary">Categories</span>
+        </div>
+        <h2 class="display-5 fw-bold mb-0">{{ num_topics }}</h2>
+        <p class="text-muted mb-0">Total topics</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Redactors Card -->
+  <div class="col-md-4">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div class="p-3 bg-info bg-opacity-10 rounded">
+            <i class="bi bi-people fs-3 text-info"></i>
+          </div>
+          <span class="badge bg-secondary">Team</span>
+        </div>
+        <h2 class="display-5 fw-bold mb-0">{{ num_redactors }}</h2>
+        <p class="text-muted mb-0">Total redactors</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="card border-0 shadow-sm">
+  <div class="card-body">
+    <h2 class="h4 fw-bold mb-4">Quick Actions</h2>
+    <div class="row g-3">
+      <!-- Added topics button -->
+      <div class="col-sm-6 col-lg-4">
+        <a href="{% url 'newspaper:topic-list' %}" class="text-decoration-none">
+          <div class="p-3 border rounded hover-shadow">
+            <div class="d-flex align-items-center">
+              <div class="p-2 bg-success bg-opacity-10 rounded me-3">
+                <i class="bi bi-arrow-right text-success"></i>
+              </div>
+              <div>
+                <div class="fw-semibold">Browse Topics</div>
+                <small class="text-muted">Explore content categories</small>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <a href="{% url 'newspaper:newspaper-list' %}" class="text-decoration-none">
+          <div class="p-3 border rounded hover-shadow">
+            <div class="d-flex align-items-center">
+              <div class="p-2 bg-primary bg-opacity-10 rounded me-3">
+                <i class="bi bi-arrow-right text-primary"></i>
+              </div>
+              <div>
+                <div class="fw-semibold">View All Newspapers</div>
+                <small class="text-muted">Browse published content</small>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <a href="{% url 'newspaper:redactor-list' %}" class="text-decoration-none">
+          <div class="p-3 border rounded hover-shadow">
+            <div class="d-flex align-items-center">
+              <div class="p-2 bg-info bg-opacity-10 rounded me-3">
+                <i class="bi bi-arrow-right text-info"></i>
+              </div>
+              <div>
+                <div class="fw-semibold">Manage Redactors</div>
+                <small class="text-muted">View editorial team</small>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

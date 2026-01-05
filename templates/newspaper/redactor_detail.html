@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow mb-4">
+    <div class="card-header bg-dark text-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">
+          <i class="bi bi-person-circle me-2"></i>
+          {{ redactor.get_full_name|default:redactor.username }}
+        </h2>
+        <div>
+          <a href="{% url 'newspaper:redactor-update' redactor.pk %}" class="btn btn-sm btn-outline-light me-2">
+            <i class="bi bi-pencil me-1"></i>Update
+          </a>
+          <a href="{% url 'newspaper:redactor-delete' redactor.pk %}" class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash me-1"></i>Delete
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="lead">
+        <strong><i class="bi bi-award me-2"></i>Years of experience:</strong>
+        <span class="badge bg-primary">{{ redactor.years_of_experience }} years</span>
+      </p>
+    </div>
+  </div>
+
+  <h3 class="mb-3">
+    <i class="bi bi-newspaper me-2"></i>Newspapers
+  </h3>
+
+  {# Using prefetched newspapers with nested topics - no additional queries #}
+  <div class="row">
+    {% for newspaper in redactor.newspapers.all %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}" class="text-decoration-none">
+                {{ newspaper.title }}
+              </a>
+            </h5>
+            <p class="card-text">
+              <small class="text-muted">
+                <i class="bi bi-tag me-1"></i>Topics:
+                {% for topic in newspaper.topics.all %}
+                  <span class="badge bg-secondary">{{ topic.name }}</span>{% if not forloop.last %} {% endif %}
+                {% empty %}
+                  <span class="text-muted">No topics</span>
+                {% endfor %}
+              </small>
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                <i class="bi bi-calendar me-1"></i>Published: {{ newspaper.published_date }}
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i>This redactor has no newspapers.
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
