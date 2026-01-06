@@ -2,7 +2,14 @@
 
 Um sistema simples de gerenciamento para uma Agência de Jornais feito com **Python + Django**, um projeto de portfólio com: models, CBVs, forms, templates e testes.
 
-## Modelo do domínio
+**Link do projeto (deploy):**
+https://newspaper-agency-system-ob81.onrender.com/
+
+**Acesso para testes:**
+- **Usuário:** admin
+- **Senha:** Adm12345
+
+## Models
 
 - **Redactor** — usuário customizado (extende `AbstractUser`) com `years_of_experience`
 - **Topic** — tópico/assunto de jornais (`name`)
@@ -45,6 +52,29 @@ python -m venv .venv
 .venv\Scripts\activate
 # macOS / Linux
 source .venv/bin/activate
+```
+Configurar variáveis de ambiente:
+
+```bash
+# Windows
+copy .env.sample .env
+# macOS / Linux
+cp .env.sample .env
+
+```
+Abra o arquivo `.env` e configure os valores:
+
+```.env
+# Se for usar Postgres (para produção)
+POSTGRES_DB=seu_nome_do_banco
+POSTGRES_DB_PORT=5432
+POSTGRES_USER=seu_usuario
+POSTGRES_PASSWORD=sua_senha
+POSTGRES_HOST=localhost
+
+# Django
+DJANGO_SECRET_KEY=sua_secret_key
+DJANGO_SETTINGS_MODULE=newspaper_agency.settings.prod # ou .dev para testar localmente
 ```
 
 Instale as dependências:
