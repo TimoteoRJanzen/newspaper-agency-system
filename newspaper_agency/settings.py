@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e)((-&wz3^dau&w^+9hsp*-a1f!%-68w9245f_-3re*)r_nof1'
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY","django-insecure-e)((-&wz3^dau&w^+9hsp*-a1f!%-68w9245f_-3re*)r_nof1")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1"
+]
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -108,7 +110,7 @@ AUTH_USER_MODEL = "newspaper.Redactor"
 
 LOGIN_REDIRECT_URL = "/"
 
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "logout"
 
 LOGIN_URL = "login"
 
