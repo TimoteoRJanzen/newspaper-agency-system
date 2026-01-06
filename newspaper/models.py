@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 
-from newspaper_agency import settings
+from django.conf import settings
 
 
 class Redactor(AbstractUser):
